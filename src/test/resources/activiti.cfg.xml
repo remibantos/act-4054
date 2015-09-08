@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--<bean id="cdiTransactionManager"
+		  class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:jboss/TransactionManager"></property>
+		<property name="resourceRef" value="true" />
+	</bean>
+
+	<bean id="threadFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:jboss/ee/concurrency/factory/default" />
+	</bean> -->
+	
+
+	<bean id="processEngineConfiguration" class="org.activiti.cdi.CdiStandaloneProcessEngineConfiguration">
+		<property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000"/>
+		<property name="jdbcDriver" value="org.h2.Driver"/>
+		<property name="jdbcUsername" value="sa"/>
+		<property name="jdbcPassword" value=""/>
+		<property name="asyncExecutorEnabled" value="true"/>
+		<property name="asyncExecutorActivate" value="true"/>
+		<property name="jobExecutorActivate" value="false"/>
+
+		<property name="databaseSchemaUpdate" value="true"/>
+
+		<!-- Use ManagedAsyncJobExecutor which is recommended for JavaEE 7 containers -->
+		<!--<property name="asyncExecutor" ref="asyncExecutor" />-->
+	</bean>
+
+
+	<!--
+	<bean id="asyncExecutor" class="org.activiti.engine.impl.asyncexecutor.ManagedAsyncJobExecutor">
+		<property name="threadFactory" ref="threadFactory"/>
+	</bean>-->
+
+
+</beans>
